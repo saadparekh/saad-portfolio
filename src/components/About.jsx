@@ -1,92 +1,121 @@
 import React from "react";
 import { FaCode, FaBrain, FaLaptopCode } from "react-icons/fa";
+import { motion } from "framer-motion";
 
-export default function About() {
-  const expertise = [
-    {
-      icon: FaBrain,
-      title: "AI & Machine Learning",
-      desc: "Building intelligent models and exploring data-driven solutions with AI/ML.",
-    },
-    {
-      icon: FaCode,
-      title: "Web Development",
-      desc: "Crafting responsive, modern, and scalable websites & applications.",
-    },
-    {
-      icon: FaLaptopCode,
-      title: "Software Development",
-      desc: "Designing and implementing scalable software solutions with strong problem-solving focus.",
-    },
-  ];
+// Variants for container (stagger effect)
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.3 }
+  }
+};
 
+// Variants for each box
+const boxVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: "easeOut" }
+  }
+};
+
+const About = () => {
   return (
     <section
       id="about"
-      className="py-24 md:py-32 px-6 md:px-12 bg-gray-900 text-white"
+      className="relative min-h-screen flex flex-col justify-center px-4 py-16 bg-gradient-to-r from-blue-900 via-purple-900 to-black overflow-hidden text-white"
     >
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 items-start">
-        {/* Left Section */}
-        <div className="flex-1 p-10 bg-gray-800 rounded-2xl shadow-2xl hover:shadow-indigo-500/50 transition-all duration-500">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">About Me</h1>
-          <h2 className="text-2xl font-semibold mb-6 relative pb-3 after:block after:w-20 after:h-1 after:bg-gradient-to-r after:from-indigo-500 after:to-blue-400 after:mt-2">
-            Passionate Developer & Tech Enthusiast
-          </h2>
-          <p className="text-gray-300 mb-4 text-lg md:text-xl leading-relaxed">
-            Hi, I’m{" "}
-            <span className="font-semibold text-indigo-400">Saad Sohail</span>, a
-            dedicated developer who loves building impactful digital solutions. I
-            work with{" "}
-            <span className="font-semibold text-indigo-400">
-              HTML, CSS, JavaScript, React.js, TailwindCSS
-            </span>{" "}
-            for frontend development, and also explore{" "}
-            <span className="font-semibold text-indigo-400">
-              Python, Java, SQL, and AI/ML
-            </span>
-            .
-          </p>
-          <p className="text-gray-300 text-lg md:text-xl leading-relaxed">
-            I am passionate about combining creativity with technology and
-            continuously learning to grow as a full-stack developer.
-          </p>
-          <button
-            onClick={() =>
-              document
-                .getElementById("contact")
-                .scrollIntoView({ behavior: "smooth" })
-            }
-            className="inline-block mt-6 px-8 py-3 bg-gradient-to-r from-indigo-500 to-blue-500 text-white rounded-full font-semibold shadow-lg transform transition hover:scale-105 hover:shadow-indigo-500/60"
+      <div className="max-w-6xl mx-auto">
+        {/* Flex container with animation */}
+        <motion.div
+          className="flex flex-col lg:flex-row gap-6 lg:gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }} // trigger when 20% visible
+        >
+          {/* Left Section - About Me */}
+          <motion.div
+            variants={boxVariants}
+            className="flex-1 p-6 bg-gray-800/70 rounded-2xl shadow-lg hover:shadow-indigo-500/30 transition duration-300"
           >
-            Get In Touch
-          </button>
-        </div>
+            <h1 className="text-3xl font-bold mb-3">About Me</h1>
+            <h2 className="text-xl font-semibold mb-4 relative pb-1 after:block after:w-12 after:h-1 after:bg-gradient-to-r after:from-indigo-500 after:to-blue-400 after:mt-2">
+              Student & Aspiring Full-Stack Developer
+            </h2>
+            <p className="text-gray-300 mb-3 text-sm md:text-base leading-relaxed">
+              Hey, I’m <span className="font-semibold text-indigo-400">Saad Sohail</span> — a curious student and aspiring full-stack developer with a passion for creating intelligent and user-friendly web applications. Currently exploring modern technologies like <span className="font-semibold text-indigo-400">React, Flask, Python, AI/ML, and databases</span>.
+            </p>
+            <p className="text-gray-300 mb-3 text-sm md:text-base leading-relaxed">
+              I focus on <span className="font-semibold text-indigo-400">crafting responsive interfaces and robust backend systems</span>, combining creativity with technology to deliver practical and innovative solutions.
+            </p>
+            <p className="text-gray-300 text-sm md:text-base leading-relaxed">
+              Let’s create something meaningful — where <span className="font-semibold text-indigo-400">ideas meet code</span>, and technology brings them to life.
+            </p>
+          </motion.div>
 
-        {/* Right Section */}
-        <div className="flex-1 p-8 bg-gradient-to-br from-indigo-700 to-blue-600 rounded-2xl shadow-2xl">
-          <h2 className="text-2xl md:text-3xl font-semibold mb-8 relative pb-3 after:block after:w-20 after:h-1 after:bg-white after:mt-2">
-            My Expertise
-          </h2>
+          {/* Right Section - Expertise */}
+          <motion.div
+            variants={boxVariants}
+            className="flex-1 p-6 bg-gray-800/70 rounded-2xl shadow-lg hover:shadow-indigo-500/30 transition duration-300 text-white"
+          >
+            <h2 className="text-xl font-semibold mb-4 relative pb-1 after:block after:w-12 after:h-1 after:bg-gradient-to-r after:from-indigo-400 after:to-blue-300 after:mt-2">
+              My Expertise
+            </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {expertise.map((exp, i) => (
-              <div
-                key={i}
-                className="p-4 bg-white/10 backdrop-blur-md rounded-xl hover:scale-105 hover:shadow-xl transition-all duration-300 flex flex-col items-start"
-                style={{ minHeight: "0", maxHeight: "200px" }} // fixed height
+            <div className="space-y-3">
+              <motion.div
+                variants={boxVariants}
+                className="flex items-start gap-3 bg-white/5 p-3 rounded-xl hover:bg-white/10 transition"
               >
-                <div className="flex items-center mb-3">
-                  <div className="w-12 h-12 flex items-center justify-center bg-white/20 rounded-xl mr-4">
-                    <exp.icon className="text-white text-2xl" />
-                  </div>
-                  <h3 className="text-lg md:text-xl font-semibold">{exp.title}</h3>
+                <div className="w-10 h-10 flex items-center justify-center bg-white/10 rounded-xl">
+                  <FaBrain className="text-indigo-400 text-lg" />
                 </div>
-                <p className="text-white/90 text-base md:text-lg leading-snug">{exp.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+                <div>
+                  <h3 className="text-md font-semibold">AI & Machine Learning</h3>
+                  <p className="text-gray-300 text-xs">
+                    Building intelligent models and exploring data-driven solutions.
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                variants={boxVariants}
+                className="flex items-start gap-3 bg-white/5 p-3 rounded-xl hover:bg-white/10 transition"
+              >
+                <div className="w-10 h-10 flex items-center justify-center bg-white/10 rounded-xl">
+                  <FaCode className="text-indigo-400 text-lg" />
+                </div>
+                <div>
+                  <h3 className="text-md font-semibold">Web Development</h3>
+                  <p className="text-gray-300 text-xs">
+                    Crafting responsive, modern, and scalable websites & apps.
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                variants={boxVariants}
+                className="flex items-start gap-3 bg-white/5 p-3 rounded-xl hover:bg-white/10 transition"
+              >
+                <div className="w-10 h-10 flex items-center justify-center bg-white/10 rounded-xl">
+                  <FaLaptopCode className="text-indigo-400 text-lg" />
+                </div>
+                <div>
+                  <h3 className="text-md font-semibold">Software Development</h3>
+                  <p className="text-gray-300 text-xs">
+                    Designing scalable software solutions with strong problem-solving focus.
+                  </p>
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
-}
+};
+
+export default About;

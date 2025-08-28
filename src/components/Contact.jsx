@@ -1,138 +1,158 @@
 import React from "react";
 import { Mail, Phone, MapPin, Linkedin, Github } from "lucide-react";
 import emailjs from "@emailjs/browser";
+import { motion } from "framer-motion";
 
 export default function Contact() {
   const sendEmail = (e) => {
     e.preventDefault();
 
-    // ✅ Match with .env variable names
     const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
     const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
     const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
-    // Debugging (check if values are loaded)
-    console.log("serviceId:", serviceId);
-    console.log("templateId:", templateId);
-    console.log("publicKey:", publicKey);
-
     emailjs.sendForm(serviceId, templateId, e.target, publicKey).then(
-      (result) => {
-        console.log("SUCCESS!", result.text);
+      () => {
         alert("Message sent successfully!");
         e.target.reset();
       },
-      (error) => {
-        console.error("FAILED...", error.text);
+      () => {
         alert("Failed to send message. Please try again.");
       }
     );
   };
 
+  // Animation Variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2 },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, x: -30 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.6 } },
+  };
+
   return (
     <section
       id="contact"
-      className="min-h-screen flex items-center justify-center bg-gray-900 text-white px-4 py-12"
+      className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-900 via-purple-900 to-black text-white px-4 py-12"
     >
-      <div className="w-full max-w-6xl bg-gray-800 rounded-2xl shadow-lg overflow-hidden">
+      <motion.div
+        className="w-full max-w-5xl bg-gray-900/90 rounded-2xl shadow-lg overflow-hidden"
+        initial={{ opacity: 0, scale: 0.9 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        viewport={{ once: true }}
+      >
         {/* Header */}
-        <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-10 text-center">
-          <h1 className="text-4xl font-bold mb-4">Get In Touch</h1>
-          <p className="text-lg max-w-2xl mx-auto">
+        <motion.div
+          className="bg-gradient-to-r from-blue-600 to-purple-600/80 p-6 text-center"
+          initial={{ opacity: 0, y: -50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true }}
+        >
+          <h1 className="text-3xl sm:text-4xl font-bold mb-2">Get In Touch</h1>
+          <p className="text-sm sm:text-lg max-w-xl mx-auto">
             Have a project in mind or want to collaborate? Feel free to reach
             out.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid md:grid-cols-2">
           {/* Contact Info */}
-          <div className="bg-gray-900 p-10 space-y-6">
+          <motion.div
+            className="bg-gray-900 p-6 space-y-4"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             {[
-              {
-                icon: Mail,
-                title: "Email",
-                value: "saadparekh3@gmail.com",
-                link: "mailto:saadparekh3@gmail.com",
-              },
-              {
-                icon: Phone,
-                title: "Phone",
-                value: "+92 319 3077899",
-                link: "tel:+923193077899",
-              },
+              { icon: Mail, title: "Email", value: "saadparekh3@gmail.com", link: "mailto:saadparekh3@gmail.com" },
+              { icon: Phone, title: "Phone", value: "+92 319 3077899", link: "tel:+923193077899" },
               { icon: MapPin, title: "Location", value: "Karachi, Pakistan" },
-              {
-                icon: Linkedin,
-                title: "LinkedIn",
-                value: "linkedin.com/in/saad-parekh-847a06292",
-                link: "https://www.linkedin.com/in/saad-parekh-847a06292/",
-              },
-              {
-                icon: Github,
-                title: "GitHub",
-                value: "github.com/saadparekh",
-                link: "https://github.com/saadparekh",
-              },
+              { icon: Linkedin, title: "LinkedIn", value: "linkedin.com/in/saad-parekh-847a06292", link: "https://www.linkedin.com/in/saad-parekh-847a06292/" },
+              { icon: Github, title: "GitHub", value: "github.com/saadparekh", link: "https://github.com/saadparekh" },
             ].map((item, i) => (
-              <div key={i} className="flex items-start space-x-4">
-                <item.icon className="w-6 h-6 text-blue-500" />
+              <motion.div
+                key={i}
+                className="flex items-start space-x-3"
+                variants={itemVariants}
+              >
+                <item.icon className="w-5 h-5 text-blue-400" />
                 <div>
-                  <h3 className="text-lg font-medium">{item.title}</h3>
+                  <h3 className="text-md font-medium">{item.title}</h3>
                   {item.link ? (
                     <a
                       href={item.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-300 hover:text-blue-400"
+                      className="text-gray-300 hover:text-blue-400 transition text-sm"
                     >
                       {item.value}
                     </a>
                   ) : (
-                    <p className="text-gray-300">{item.value}</p>
+                    <p className="text-gray-300 text-sm">{item.value}</p>
                   )}
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           {/* Contact Form */}
-          <div className="p-10 bg-gray-800">
-            <h2 className="text-2xl font-semibold mb-6 relative pb-3 after:block after:w-16 after:h-1 after:bg-blue-500 after:mt-2">
+          <motion.div
+            className="p-6 bg-gray-800/90"
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            <h2 className="text-xl sm:text-2xl font-semibold mb-4 relative pb-2 after:block after:w-14 after:h-1 after:bg-blue-400 after:mt-2">
               Send a Message
             </h2>
 
-            <form onSubmit={sendEmail} className="space-y-6">
-              <input
+            <form onSubmit={sendEmail} className="space-y-4">
+              <motion.input
                 type="text"
-                name="name" // ✅ Match EmailJS template {{name}}
+                name="name"
                 placeholder="Your Name"
-                className="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:ring-2 focus:ring-blue-500"
+                className="w-full p-2 sm:p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:ring-2 focus:ring-blue-400 transition text-sm"
                 required
+                whileFocus={{ scale: 1.02 }}
               />
-              <input
+              <motion.input
                 type="email"
-                name="email" // ✅ Match EmailJS template {{email}}
+                name="email"
                 placeholder="Your Email"
-                className="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:ring-2 focus:ring-blue-500"
+                className="w-full p-2 sm:p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:ring-2 focus:ring-blue-400 transition text-sm"
                 required
+                whileFocus={{ scale: 1.02 }}
               />
-              <textarea
-                name="message" // ✅ Match EmailJS template {{message}}
+              <motion.textarea
+                name="message"
                 placeholder="Your Message"
-                rows="5"
-                className="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:ring-2 focus:ring-blue-500"
+                rows="4"
+                className="w-full p-2 sm:p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:ring-2 focus:ring-blue-400 transition text-sm"
                 required
-              ></textarea>
-              <button
+                whileFocus={{ scale: 1.02 }}
+              ></motion.textarea>
+              <motion.button
                 type="submit"
-                className="bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-3 rounded-lg font-semibold hover:scale-105 transform transition text-white shadow-lg"
+                className="bg-gradient-to-r from-blue-500 to-purple-500 px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold text-white shadow-md text-sm sm:text-base"
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.95 }}
               >
                 Send Message
-              </button>
+              </motion.button>
             </form>
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
