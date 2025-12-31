@@ -26,15 +26,15 @@ export default function Projects() {
       github: "https://github.com/saadparekh/event_booking_website",
       live: "https://event-booking-website-1we5.onrender.com",
       tech: ["html", "Inline css", "javascript", "Flask", "MongoDB"],
-      image: eiaImg,
+      image: cinemaImg,
     },
     {
-      title: "EarthMate 🌍 — AI-powered Sustainability Web App",
+      title: "EarthMate — AI-powered Sustainability Web App",
       description:
         "Full-stack sustainability web app that helps users reduce carbon emissions using personalized action plans and an AI chatbot.",
       github: "https://github.com/saadparekh/carbon_webapp",
       live: "https://carbon-webapp-sigma.vercel.app",
-      tech: ["React", "AI", "Sustainability", "Carbon Tracking"],
+      tech: ["React", "AI", "Sustainability", "Carbon Tracking","Flask"],
       image: eiaImg,
     },
     {
