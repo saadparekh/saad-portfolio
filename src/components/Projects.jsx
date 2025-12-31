@@ -1,5 +1,5 @@
 import React from "react";
-import { FaGithub } from "react-icons/fa";
+import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 // Import images from src/assets
@@ -10,12 +10,32 @@ import cinemaImg from "../assets/projects/cinema.jpeg";
 export default function Projects() {
   const projectData = [
     {
-      title: "University Complaint System",
+      title: "University Complaint Tracking System",
       description:
-        "A Flask + SQLite system to track and manage university complaints efficiently.",
-      github: "https://github.com/saadparekh/university_complain_management_system",
+        "Full-stack web application where students can submit complaints and track their status.",
+      github:
+        "https://github.com/saadparekh/university_complain_tracking_system",
+      live: "https://university-complain-tracking-system.onrender.com",
       tech: ["Flask", "SQLite", "HTML", "CSS"],
       image: uniImg,
+    },
+    {
+      title: "Event Booking Website",
+      description:
+        "Online event booking platform allowing users to browse events and book tickets.",
+      github: "https://github.com/saadparekh/event_booking_website",
+      live: "https://event-booking-website-1we5.onrender.com",
+      tech: ["html", "Inline css", "javascript", "Flask", "MongoDB"],
+      image: eiaImg,
+    },
+    {
+      title: "EarthMate 🌍 — AI-powered Sustainability Web App",
+      description:
+        "Full-stack sustainability web app that helps users reduce carbon emissions using personalized action plans and an AI chatbot.",
+      github: "https://github.com/saadparekh/carbon_webapp",
+      live: "https://carbon-webapp-sigma.vercel.app",
+      tech: ["React", "AI", "Sustainability", "Carbon Tracking"],
+      image: eiaImg,
     },
     {
       title: "Environmental Impact Analyzer",
@@ -24,14 +44,6 @@ export default function Projects() {
       github: "https://github.com/saadparekh/Environment-Effect-Analyzer",
       tech: ["Python", "AI", "Data Analysis"],
       image: eiaImg,
-    },
-    {
-      title: "Cinema Booking System",
-      description:
-        "Java-based seat reservation and ticket booking system with a simple UI.",
-      github: "https://github.com/saadparekh/ManagementSystemCinema",
-      tech: ["Java", "OOP"],
-      image: cinemaImg,
     },
   ];
 
@@ -116,14 +128,28 @@ export default function Projects() {
                   ))}
                 </div>
 
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-auto inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-purple-600 px-3 py-1 text-white rounded-full text-sm font-medium hover:from-blue-500 hover:to-purple-500 transition"
-                >
-                  <FaGithub className="mr-2" /> GitHub
-                </a>
+                {/* Buttons */}
+                <div className="mt-auto flex gap-2">
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 inline-flex items-center justify-center bg-gradient-to-r from-gray-700 to-gray-900 px-3 py-1 text-white rounded-full text-sm font-medium hover:opacity-90 transition"
+                  >
+                    <FaGithub className="mr-2" /> GitHub
+                  </a>
+
+                  {project.live && (
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-purple-600 px-3 py-1 text-white rounded-full text-sm font-medium hover:from-blue-500 hover:to-purple-500 transition"
+                    >
+                      <FaExternalLinkAlt className="mr-2" /> Live
+                    </a>
+                  )}
+                </div>
               </div>
             </motion.div>
           ))}

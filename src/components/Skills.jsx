@@ -11,6 +11,8 @@ import {
 } from "react-icons/fa";
 import { SiFlask, SiSqlite, SiMysql } from "react-icons/si";
 import { motion } from "framer-motion";
+import { SiMongodb } from "react-icons/si";
+import { SiTailwindcss } from "react-icons/si";
 
 // Animation Variants
 const containerVariants = {
@@ -42,6 +44,7 @@ const skills = [
   { name: "Flask", icon: <SiFlask className="text-gray-300 text-4xl md:text-5xl" /> },
   { name: "SQLite", icon: <SiSqlite className="text-blue-400 text-4xl md:text-5xl" /> },
   { name: "MySQL", icon: <SiMysql className="text-blue-600 text-4xl md:text-5xl" /> },
+  { name: "MongoDB", icon: <SiMongodb className="text-green-500 text-4xl md:text-5xl" /> },
   { name: "AI/ML", icon: <FaBrain className="text-pink-400 text-4xl md:text-5xl" /> },
 ];
 
